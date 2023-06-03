@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat</title>
+  <!-- <link rel="stylesheet" type="text/css" href="chat.css"> -->
+  <style>
+    #chat-container {
+  width: 400px;
+  height: 300px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+#chat-messages {
+  height: 200px;
+  overflow: auto;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+#chat-input {
+  width: 300px;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+#chat-send {
+  padding: 5px 10px;
+}
+  </style>
+</head>
+<body>
+  <div id="chat-container">
+    <div id="chat-messages"></div>
+    <input type="text" id="chat-input" placeholder="Type your message">
+    <button id="chat-send">Send</button>
+  </div>
+
+  <script>
+    // Function to display a new chat message
+function displayMessage(message) {
+  var chatMessages = document.getElementById("chat-messages");
+  var newMessage = document.createElement("p");
+  newMessage.textContent = message;
+  chatMessages.appendChild(newMessage);
+  chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom of the chat messages
+}
+
+// Function to handle sending a message
+function sendMessage() {
+  var input = document.getElementById("chat-input");
+  var message = input.value;
+  if (message.trim() !== "") {
+    displayMessage("You: " + message);
+    input.value = "";
+    // Add code here to send the message to the server or perform any other necessary actions
+  }
+}
+
+// Event listener for send button click
+document.getElementById("chat-send").addEventListener("click", sendMessage);
+
+// Event listener for enter key press in the input field
+document.getElementById("chat-input").addEventListener("keydown", function(event) {
+  if (event.keyCode === 13) { // 13 is the key code for enter
+    event.preventDefault();
+    sendMessage();
+  }
+});
+//This example sets up a basic chat interface with an input field, send button, and a message display area. 
+//The displayMessage function appends a new message to the chat area, 
+//and the sendMessage function is called when the send button is clicked or the enter key is pressed. 
+//You can customize this code and add additional functionality as per your requirements.
+// Remember to handle the back-end implementation separately to handle message storage and communication with other users.
+  </script>
+</body>
+</html>
